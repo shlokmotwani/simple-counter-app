@@ -4,46 +4,48 @@ import "./App.css";
 function App() {
   const [count, setCount] = useState(0);
   const [customValues, setCustomValues] = useState({
-    incInput : 0,
+    incInput: 0,
     decInput: 0,
   });
   const [countHistory, setCountHistory] = useState([count]);
 
-  function handleIncrement(num = 1) {
-    setCount((count) => {
-      let history = [...countHistory, count + num];
-      setCountHistory(history);
-      return count + num;
-    });
+  function handleIncrement(num) {
+    setCount((count) => count + num);
+    let history = [...countHistory, count + num];
+    setCountHistory(history);
   }
 
-  function handleDecrement(num = 1) {
+  function handleDecrement(num) {
+    let history;
     setCount((count) => {
-      let history;
-      if (count - num <= 0) {
-        if(count <= 0){
-          return 0;
-        }
-        history = [...countHistory, 0];
-        setCountHistory(history);
+      if (count-num <= 0) {
         return 0;
       } else {
-        history = [...countHistory, count - num];
-        setCountHistory(history);
         return count - num;
       }
     });
+    if(count>0){
+      if (count - num >= 0) {
+        history = [...countHistory, count - num];
+        setCountHistory(history);
+      }
+      else{
+        history = [...countHistory, 0];
+        setCountHistory(history);
+      }
+    }
+   
   }
 
-  function handleCustomIncrement(){
+  function handleCustomIncrement() {
     handleIncrement(customValues.incInput);
   }
 
-  function handleCustomDecrement(){
+  function handleCustomDecrement() {
     handleDecrement(customValues.decInput);
   }
 
-  function handleIncInputChange(e){
+  function handleIncInputChange(e) {
     let values = {
       ...customValues,
       incInput: Number(e.target.value),
@@ -51,7 +53,7 @@ function App() {
     setCustomValues(values);
   }
 
-  function handleDecInputChange(e){
+  function handleDecInputChange(e) {
     let values = {
       ...customValues,
       decInput: Number(e.target.value),
@@ -69,18 +71,28 @@ function App() {
       <div>
         <p>Count: {count}</p>
         <div>
-          <button onClick={handleIncrement}>+</button>
-          <button onClick={handleDecrement}>-</button>
+          <button onClick={()=>handleIncrement(1)}>+</button>
+          <button onClick={()=>handleDecrement(1)}>-</button>
         </div>
         <div id="custom-input-div">
           <p>
             Increment by :
-            <input type="number" name="" id="" onChange={handleIncInputChange}/>
+            <input
+              type="number"
+              name=""
+              id=""
+              onChange={handleIncInputChange}
+            />
             <button onClick={handleCustomIncrement}>OK</button>
           </p>
           <p>
             Decrement by :
-            <input type="number" name="" id="" onChange={handleDecInputChange}/>
+            <input
+              type="number"
+              name=""
+              id=""
+              onChange={handleDecInputChange}
+            />
             <button onClick={handleCustomDecrement}>OK</button>
           </p>
         </div>
