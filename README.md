@@ -1,5 +1,7 @@
 # Simple Counter App
 
+[Live Preview](https://simple-counter-app-nine.vercel.app/)
+
 A React application that displays a simple counter. The counter initially displays 0 and has two buttons to increment or decrement the count. The count updates accordingly when either of the buttons is clicked.
 
 ### Further Enhancements
