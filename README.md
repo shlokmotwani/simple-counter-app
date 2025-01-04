@@ -12,3 +12,5 @@ A React application that displays a simple counter. The counter initially displa
 3. Allows users to input a custom increment or decrement value.
 
 4. A reset button to set the counter back to 0.
+
+<img src="./assets/simple-counter-app-preview.png">
